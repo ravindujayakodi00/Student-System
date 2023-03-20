@@ -11,13 +11,18 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/student")
 public class StudentController {
-
     @Autowired
     private StudentService studentService;
 
-    @PostMapping
+    @PostMapping("/add")
     public String add(@RequestBody Student student){
-        studentService.saveStudent();
-        return null;
+        studentService.saveStudent(student);
+        return "New student is added";
     }
+
+    @GetMapping("/getAll")
+    public List<Student> list(){
+        return studentService.getAllStudents();
+    }
+
 }
